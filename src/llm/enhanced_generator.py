@@ -53,24 +53,15 @@ def _convert_to_gemini_messages(system_prompt: Dict, history: List[Dict]) -> Lis
 
 
 def generate_llm_response(
-    query: str, 
+    query: dict, 
     retrieved_docs: List[Dict], 
     session_id: str = "default_session", 
     max_docs: int = 4
 ) -> str:
-    """
-    Generate LLM response using Gemini with retrieved context
     
-    Args:
-        query: User's question
-        retrieved_docs: Documents retrieved from vector search
-        session_id: Session identifier for conversation history
-        max_docs: Maximum documents to include in context
-        
-    Returns:
-        Generated response text
-    """
-    # Build context from retrieved documents
+    user_query = query['query']
+    pre_queries = query['pre_queries']
+    pre_response = query['pre_response']
     context_parts = []
     context_parts.append("=== RELEVANT INFORMATION ===\n")
     
@@ -83,13 +74,17 @@ def generate_llm_response(
         context_parts.append("")
     
     context_parts.append("=== USER QUESTION ===")
-    context_parts.append(query)
+    context_parts.append(user_query)
     
     user_input_text = "\n".join(context_parts)
     
     # Get conversation history
-    history = get_session_history(session_id)
-    
+    #history = get_session_history(session_id)
+
+    history = [{
+        'previous queries ': pre_queries,
+        'previous response': pre_response
+    }]
     # System prompt
     system_prompt = {
         "role": "system",
@@ -104,6 +99,11 @@ def generate_llm_response(
     # Add user message to history
     history.append({"role": "user", "content": user_input_text})
     
+
+    #history.update({"role": "user", "content": user_input_text})
+
+    print(history)
+
     # Keep only last 10 messages
     if len(history) > 10:
         history = history[-10:]
