@@ -41,8 +41,10 @@ def query_mongodb_rag(query: dict, session_id: str = "default") -> str:
 
 
 @app.post('/api/query/')
-async def get_response( history: str, current_query: str ):
-
+async def get_response( history: str = Form(...), 
+                       current_query: str = Form(...) ):
+        
+    try:
         query = {
             'history': history,
             'query': current_query
@@ -64,5 +66,13 @@ async def get_response( history: str, current_query: str ):
         }
 
         return JSONResponse(content=response, status_code=200)
+    
+    except Exception as e:
+        response = {
+            'status': False,
+            'statuscode': 500,
+            'text': str(e)
+        }
+        return JSONResponse(content=response, status_code=500)
 
 
