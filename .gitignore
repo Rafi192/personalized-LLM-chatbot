@@ -1,4 +1,5 @@
 .env
+rag_env_chatbot/
 # .env*
 rag_chatbot_env/
 venv/
@@ -8,3 +9,6 @@ src/ingestion/__pycache__/
 src/llm/__pycache__/
 src/utils/__pycache__/
 src/retriever/__pycache__/
+# .env*
+rag_chatbot_env/
+venv/
