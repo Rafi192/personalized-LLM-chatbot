@@ -60,8 +60,7 @@ def generate_llm_response(
 ) -> str:
     
     user_query = query['query']
-    pre_queries = query['pre_queries']
-    pre_response = query['pre_response']
+    pre_historis = query['history']
     context_parts = []
     context_parts.append("=== RELEVANT INFORMATION ===\n")
     
@@ -82,9 +81,9 @@ def generate_llm_response(
     #history = get_session_history(session_id)
 
     history = [{
-        'previous queries ': pre_queries,
-        'previous response': pre_response
-    }]
+        'role': 'user',
+        'content': pre_historis
+        }]
     # System prompt
     system_prompt = {
         "role": "system",
@@ -102,7 +101,7 @@ def generate_llm_response(
 
     #history.update({"role": "user", "content": user_input_text})
 
-    print(history)
+    print(f'\n\nPrevious history : {history}\n\n')
 
     # Keep only last 10 messages
     if len(history) > 10:

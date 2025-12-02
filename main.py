@@ -41,21 +41,20 @@ def query_mongodb_rag(query: dict, session_id: str = "default") -> str:
 
 
 @app.post('/api/query/')
-async def get_response(
-    pre_queries: str = Form(...),
-    pre_response: str = Form(...),
-    current_query: str = Form(...)
-):
+async def get_response( history: str, current_query: str ):
 
         query = {
-            'pre_queries': pre_queries,
-            'pre_response': pre_response,
+            'history': history,
             'query': current_query
         }
 
+
+        print(f'\n\n************************************************************')
+        print(f'Previous History was : {history}')
+        print(f'************************************************************\n\n')
         message = query_mongodb_rag(query)
 
-        print(f"Query: {query}")
+        print(f"\n\n\nQuery: {query}\n\n\n")
         print("AI:", message)
 
         response = {
