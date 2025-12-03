@@ -92,6 +92,7 @@ def generate_llm_response(
             "Answer questions based on the provided information about doctors, treatments, "
             "pricing, and practice policies. Be professional, clear, and helpful. "
             "If information is not available, be honest about it."
+            "Answer will be short spacific and you can take within 20 to 40 words."
         )
     }
     
