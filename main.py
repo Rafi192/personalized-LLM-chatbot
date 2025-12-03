@@ -11,6 +11,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from src.retriever.mongodb_retriever import MongoDBRetriever
 from src.ingestion.multi_collection_embedder import get_embedder
 from src.llm.enhanced_generator import generate_llm_response
+from src.ingestion.ingest_multi_collection_mongodb import main
 
 
 print("Initializing RAG system...")
@@ -75,4 +76,21 @@ async def get_response( history: str = Form(...),
         }
         return JSONResponse(content=response, status_code=500)
 
+@app.put('/api/update-data/')
+async def update_db():
+    try:
+        message = main()
+        response = {
+            'status': True,
+            'status code': 200,
+            'text' : message
+        }
+        return JSONResponse(content=response, status_code=200)
+    except Exception as e:
+        response = {
+            'status': False,
+            'statuscode': 500,
+            'text': str(e)
+        }
+        return JSONResponse(content=response, status_code=500)
 

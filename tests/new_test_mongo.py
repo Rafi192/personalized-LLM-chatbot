@@ -1,7 +1,3 @@
-"""
-Simple Test Script for Multi-Collection Medical RAG Chatbot
-"""
-
 import sys, os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
@@ -9,8 +5,6 @@ from src.retriever.mongodb_retriever import MongoDBRetriever
 from src.ingestion.multi_collection_embedder import get_embedder
 from src.llm.enhanced_generator import generate_llm_response
 
-
-# Initialize components
 print("Initializing RAG system...")
 embedder = get_embedder()
 

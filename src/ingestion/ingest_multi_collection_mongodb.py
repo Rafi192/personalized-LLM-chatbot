@@ -236,7 +236,7 @@ def main():
     # OPTIONAL: TEST SEARCH
     # ============================================================
     
-    test_search = input("\n\nWould you like to test a search query? (yes/no): ").strip().lower()
+    """test_search = input("\n\nWould you like to test a search query? (yes/no): ").strip().lower()
     
     if test_search == 'yes':
         while True:
@@ -278,7 +278,7 @@ def main():
                 
             except Exception as e:
                 print(f" Search error: {e}")
-                logger.exception("Search failed")
+                logger.exception("Search failed")"""
     
     print("\nIngestion pipeline finished!")
     return message
