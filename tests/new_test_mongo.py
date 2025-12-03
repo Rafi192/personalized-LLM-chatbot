@@ -23,17 +23,7 @@ print("✓ System ready!\n")
 
 
 def query_mongodb_rag(user_query: str, session_id: str = "default") -> str:
-    """
-    Process user query using MongoDB RAG pipeline.
-    
-    Args:
-        user_query: User's question
-        session_id: Session ID for conversation history
-        
-    Returns:
-        Generated response from LLM
-    """
-    # Retrieve relevant documents
+
     retrieved_docs = mongodb_retriever.retrieve(user_query, top_k=3)
     
     # Show what was retrieved

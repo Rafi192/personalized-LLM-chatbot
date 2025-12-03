@@ -20,83 +20,83 @@ class MultiCollectionMongoDBLoader:
         "fields": ["name", "title", "description"],
         "required_fields": ["name", "title", "description"],
         "template": """Doctor Information:
-Name: {name}
-Title: {title}
-Description: {description}
-"""
+        Name: {name}
+        Title: {title}
+        Description: {description}
+        """
     },
 
     "faqs": {
         "fields": ["question", "answer"],
         "required_fields": ["question", "answer"],
         "template": """FAQ:
-Question: {question}
-Answer: {answer}
-"""
+        Question: {question}
+        Answer: {answer}
+        """
     },
 
     "treatmentlists": {
         "fields": ["serviceName", "description"],
         "required_fields": ["serviceName", "description"],
         "template": """Treatment Information:
-Service Name: {serviceName}
-Description: {description}
-"""
+        Service Name: {serviceName}
+        Description: {description}
+        """
     },
 
     "treatmentcategories": {
         "fields": ["name"],
         "required_fields": ["name"],
         "template": """Treatment Category:
-Name: {name}
-"""
+        Name: {name}
+        """
     },
 
     "treatmentfees": {
-        "fields": ["serviceName", "currency"],
-        "required_fields": ["serviceName", "currency"],
+        "fields": ["serviceName", "currency", 'items'],
+        "required_fields": ["serviceName", "currency", 'items'],
         "template": """Treatment Pricing:
-Treatment Name: {serviceName}
-Price: {currency}
-"""
-    },
+        Treatment Name: {serviceName}
+        Price: {items}
+        """
+            },
 
     "contactinfos": {
         "fields": ["address", "email", "openingHours", "phoneNumbers"],
         "required_fields": ["address", "email", "openingHours", "phoneNumbers"],
         "template": """Contact Information:
-Address: {address}
-Phone Numbers: {phoneNumbers}
-Email: {email}
-Opening Hours: {openingHours}
-"""
+        Address: {address}
+        Phone Numbers: {phoneNumbers}
+        Email: {email}
+        Opening Hours: {openingHours}
+        """
     },
 
     "privacypolicies": {
         "fields": ["title", "content", "section", "last_updated"],
         "required_fields": ["content"],
         "template": """Privacy Policy:
-Title: {title}
-Section: {section}
-Last Updated: {last_updated}
-Content: {content}
-"""
+        Title: {title}
+        Section: {section}
+        Last Updated: {last_updated}
+        Content: {content}
+        """
     },
 
     "termsofservices": {
         "fields": ["policyContent"],
         "required_fields": ["policyContent"],
         "template": """Terms of Service:
-Content: {policyContent}
-"""
+        Content: {policyContent}
+        """
     },
 
     "gdprs": {
         "fields": ["gdprContent"],
         "required_fields": ["gdprContent"],
         "template": """GDPR Policy:
-Content: {gdprContent}
-"""
+        Content: {gdprContent}
+        """
     }
 }
 
@@ -214,7 +214,13 @@ Content: {gdprContent}
         # Extract and clean fields
         extracted_data = {}
         for field in schema['fields']:
-            value = document.get(field, '')
+            if field =='items':
+                value = document['items'][0]['rate']
+                print('******************************************************************')
+                print(f'Value for {field} is : {value}')
+                print('******************************************************************')
+            else: 
+                value = document.get(field, '')
             
             # Handle different data types
             if isinstance(value, list):

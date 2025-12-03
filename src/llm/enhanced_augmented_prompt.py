@@ -13,43 +13,27 @@ def augmented_prompt(
     include_scores: bool = True,
     include_sources: bool = True
 ) -> str:
-    """
-    Build an augmented prompt with retrieved context for LLM
-    
-    Args:
-        query: User's question
-        retrieved_docs: List of retrieved documents from vector search
-                       Each doc should have: 'text', 'metadata', 'similarity_score'
-        max_docs: Maximum number of documents to include
-        include_scores: Whether to show relevance scores
-        include_sources: Whether to show source collections
-        
-    Returns:
-        Formatted prompt string ready for LLM
-    """
     if not retrieved_docs:
         return f"""
-You are a helpful medical practice assistant. The user asked:
+                You are a helpful medical practice assistant. The user asked:
 
-"{query}"
+                "{query}"
 
-However, no relevant information was found in the database. Please provide a helpful response 
-based on general knowledge, or suggest that the user contact the practice directly for specific information.
-"""
+                However, no relevant information was found in the database. Please provide a helpful response 
+                based on general knowledge, or suggest that the user contact the practice directly for specific information.
+                """
     
     prompt_parts = []
-    
-    # Header
+
     prompt_parts.append("=== CONTEXT FROM DATABASE ===\n")
-    
-    # Add each retrieved document
+
     for i, doc in enumerate(retrieved_docs[:max_docs], 1):
-        # Extract metadata
+
         collection = doc.get('metadata', {}).get('collection', 'unknown')
         score = doc.get('similarity_score', 0.0)
         text = doc.get('text', '')
         
-        # Build document header
+
         header_parts = [f"Document {i}"]
         if include_sources:
             header_parts.append(f"from {collection.upper()}")
@@ -58,9 +42,8 @@ based on general knowledge, or suggest that the user contact the practice direct
         
         prompt_parts.append(f"[{' '.join(header_parts)}]")
         prompt_parts.append(text)
-        prompt_parts.append("")  # Blank line for readability
+        prompt_parts.append("")  
     
-    # Add user query
     prompt_parts.append("=== USER QUESTION ===")
     prompt_parts.append(query)
     
@@ -72,18 +55,6 @@ def augmented_prompt_medical(
     retrieved_docs: List[Dict[str, Any]],
     max_docs: int = 4
 ) -> str:
-    """
-    Specialized prompt builder for medical practice queries
-    Includes specific instructions for medical context
-    
-    Args:
-        query: User's question
-        retrieved_docs: Retrieved documents
-        max_docs: Maximum documents to include
-        
-    Returns:
-        Formatted prompt with medical-specific instructions
-    """
     prompt_parts = []
     
     # Context section
@@ -139,18 +110,6 @@ def augmented_prompt_with_intent(
     intent: str = "general",
     max_docs: int = 4
 ) -> str:
-    """
-    Build prompt that adapts based on detected query intent
-    
-    Args:
-        query: User's question
-        retrieved_docs: Retrieved documents
-        intent: Detected intent ('booking', 'pricing', 'doctor_info', 'treatment_info', 'general')
-        max_docs: Maximum documents
-        
-    Returns:
-        Intent-adapted prompt
-    """
     prompt_parts = []
     
     # Intent-specific headers

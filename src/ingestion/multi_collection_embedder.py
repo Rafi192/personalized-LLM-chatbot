@@ -215,25 +215,5 @@ class MultiCollectionEmbedder(Embeddings):
 
 
 def get_embedder(model_name: str = "BAAI/bge-base-en-v1.5", **kwargs) -> MultiCollectionEmbedder:
-    """
-    Factory function to create embedder
-    
-    Args:
-        model_name: HuggingFace model name
-            Recommended options:
-            - "BAAI/bge-m3" - Best for multilingual
-            - "BAAI/bge-base-en-v1.5" - Best for English
-            - "bert-base-uncased" - Lightweight option
-        **kwargs: Additional arguments for MultiCollectionEmbedder
-        
-    Returns:
-        Configured embedder instance
-    """
+
     return MultiCollectionEmbedder(model_name=model_name, **kwargs)
-
-
-# Backward compatibility with your existing code
-# class BERTEmbeddings(MultiCollectionEmbedder):
-#     """Alias for backward compatibility"""
-#     def __init__(self, model_name="BAAI/bge-base-en-v1.5", device=None):
-#         super().__init__(model_name=model_name, device=device)

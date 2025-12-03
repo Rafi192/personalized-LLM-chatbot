@@ -215,7 +215,7 @@ def main():
     # ============================================================
     # COMPLETION
     # ============================================================
-    
+    message = f"   - Total Documents: {len(all_documents)}\n   - Collections Processed: {len(collection_counts)}"
     print("\n" + "="*70)
     print("INGESTION COMPLETED SUCCESSFULLY!")
     print("="*70)
@@ -281,6 +281,7 @@ def main():
                 logger.exception("Search failed")
     
     print("\nIngestion pipeline finished!")
+    return message
 
 
 if __name__ == "__main__":
