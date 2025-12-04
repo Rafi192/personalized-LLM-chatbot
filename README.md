@@ -16,7 +16,7 @@ Develop a personalized LLM chatbot using cutting-edge technology. This project p
 
 ### Prerequisites
 
-- Python 3.11
+- Python 3.11 or greater
 - requirements.txt
 - Google Gemini API key
 - Git
