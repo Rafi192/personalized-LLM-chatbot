@@ -77,14 +77,21 @@ async def get_response( history: str = Form(...),
         return JSONResponse(content=response, status_code=500)
 
 @app.put('/api/update-data/')
-async def update_db():
+async def update_db(want_refresh: bool):
     try:
-        message = main()
-        response = {
-            'status': True,
-            'status code': 200,
-            'text' : message
-        }
+        if(want_refresh):
+            message = main()
+            response = {
+                'status': True,
+                'status code': 200,
+                'text' : message
+            }
+        else:
+            response = {
+                'status': True,
+                'status code': 200,
+                'text' : "For refresh set want_refresh 'True'."
+            }
         return JSONResponse(content=response, status_code=200)
     except Exception as e:
         response = {
