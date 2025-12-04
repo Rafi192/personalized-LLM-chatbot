@@ -14,46 +14,6 @@ Develop a personalized LLM chatbot using cutting-edge technology. This project p
 -  **Smart Retrieval** - Collection-specific filtering and relevance scoring
 -  **Comprehensive Testing** - Full test suite for validation
 
-## 📁 Project Structure
-
-```
-personalized-LLM-chatbot
-├── LICENSE
-├── data
-│   └── embeddings
-│       └── medical_practice_vectors
-│           ├── documents.pkl
-│           └── faiss_index.bin
-├── src
-│   ├── __init__.py
-│   ├── api
-│   │   ├── app.py
-│   │   └── routes.py
-│   ├── db
-│   │   ├── test_db.py
-│   │   └── test_db_2.py
-│   ├── ingestion
-│   │   ├── ingest_multi_collection_mongodb.py
-│   │   ├── mongodb_indexer.py
-│   │   ├── multi_collection_embedder.py
-│   │   └── multi_collection_mongodb_loader.py
-│   ├── llm
-│   │   ├── __init__.py
-│   │   ├── augmented_prompt.py
-│   │   ├── enhanced_augmented_prompt.py
-│   │   └── enhanced_generator.py
-│   ├── retriever
-│   │   ├── enhanced_mongodb_retriever.py
-│   │   └── mongodb_retriever.py
-│   └── utils
-│       ├── config.py
-│       ├── helpers.py
-│       └── logger.py
-└── tests
-    ├── new_test_mongo.py
-    └── test_mongo.py
-```
-
 ### Prerequisites
 
 - Python 3.11
@@ -95,7 +55,11 @@ personalized-LLM-chatbot
    # Google Gemini API
    GEMINI_API_KEY=your_gemini_api_key_here
 ```
+5. **Run Api**
 
+```env
+   uvicorn main:app --reload
+```
 ## 💻 Running Locally
 
 ### Step 1: Verify Database Connection
@@ -166,10 +130,53 @@ AI: We have two Specialist Orthodontists:
 - Dr. Anca Herman: Highly skilled specialist...
 
 ----------------------------------------------------------------------
-
-You: exit
+ You: exit
 👋 Goodbye!
 ```
+
+Postman Documentation : https://documenter.getpostman.com/view/49369352/2sB3dMyXJZ
+
+## 📁 Project Structure
+
+```
+personalized-LLM-chatbot
+├── LICENSE
+├── data
+│   └── embeddings
+│       └── medical_practice_vectors
+│           ├── documents.pkl
+│           └── faiss_index.bin
+├── src
+│   ├── __init__.py
+│   ├── api
+│   │   ├── app.py
+│   │   └── routes.py
+│   ├── db
+│   │   ├── test_db.py
+│   │   └── test_db_2.py
+│   ├── ingestion
+│   │   ├── ingest_multi_collection_mongodb.py
+│   │   ├── mongodb_indexer.py
+│   │   ├── multi_collection_embedder.py
+│   │   └── multi_collection_mongodb_loader.py
+│   ├── llm
+│   │   ├── __init__.py
+│   │   ├── augmented_prompt.py
+│   │   ├── enhanced_augmented_prompt.py
+│   │   └── enhanced_generator.py
+│   ├── retriever
+│   │   ├── enhanced_mongodb_retriever.py
+│   │   └── mongodb_retriever.py
+│   └── utils
+│       ├── config.py
+│       ├── helpers.py
+│       └── logger.py
+└── tests
+    ├── new_test_mongo.py
+    └── test_mongo.py
+```
+
+Please ensure your code follows the project's style guidelines and includes tests where applicable.
 
 
 ## 👥 Contributing
@@ -182,8 +189,3 @@ Contributions are welcome! Here's how you can help:
 4. **Commit** your changes: `git commit -am 'Add some feature'`
 5. **Push** to your branch: `git push origin feature/your-feature`
 6. **Open** a pull request
-
-Please ensure your code follows the project's style guidelines and includes tests where applicable.
-
----
-*This README was generated with ❤️ by ReadmeBuddy*
