@@ -22,7 +22,7 @@ class MultiCollectionEmbedder(Embeddings):
     def __init__(
         self, 
         #model_name: str = "BAAI/bge-base-en-v1.5",  # Default to BGE-M3 for multilingual
-        model_name: str = "sentence-transformers/all-MiniLM-L6-v2",  # Default to BGE-M3 for multilingual
+        model_name: str = "BAAI/bge-base-en-v1.5",  # Default to BGE-M3 for multilingual
         device: str = None,
         max_length: int = 512,
         batch_size: int = 32,
@@ -216,6 +216,6 @@ class MultiCollectionEmbedder(Embeddings):
 
 
 #def get_embedder(model_name: str = "BAAI/bge-base-en-v1.5", **kwargs) -> MultiCollectionEmbedder:
-def get_embedder(model_name: str = "sentence-transformers/all-MiniLM-L6-v2", **kwargs) -> MultiCollectionEmbedder:
+def get_embedder(model_name: str = "BAAI/bge-base-en-v1.5", **kwargs) -> MultiCollectionEmbedder:
 
     return MultiCollectionEmbedder(model_name=model_name, **kwargs)
