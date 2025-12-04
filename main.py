@@ -17,11 +17,18 @@ from src.ingestion.ingest_multi_collection_mongodb import main
 print("Initializing RAG system...")
 embedder = get_embedder()
 
-mongodb_retriever = MongoDBRetriever(
-    embedder=embedder,
-    vector_store_path="data/embeddings/medical_practice_vectors"
-)
-
+if os.path.exists("data/embeddings/medical_practice_vectors"):
+    mongodb_retriever = MongoDBRetriever(
+        embedder=embedder,
+        vector_store_path="data/embeddings/medical_practice_vectors"
+    )
+else:
+    os.makedirs('data/embeddings', exist_ok=True)
+    main()
+    mongodb_retriever = MongoDBRetriever(
+        embedder=embedder,
+        vector_store_path="data/embeddings/medical_practice_vectors"
+    )
 print("✓ System ready!\n")
 
 
@@ -50,7 +57,6 @@ async def get_response( history: str = Form(...),
             'history': history,
             'query': current_query
         }
-
 
         print(f'\n\n************************************************************')
         print(f'Previous History was : {history}')

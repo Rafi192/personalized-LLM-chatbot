@@ -1,8 +1,8 @@
 .env
 rag_env_chatbot/
-# .env*
+.env*
 __pycache__/
 */__pycache__/
 rag_chatbot_env/
 venv/
-
+data/
