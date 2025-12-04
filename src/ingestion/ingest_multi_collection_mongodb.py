@@ -78,7 +78,7 @@ def main():
     VECTOR_STORE_PATH = "data/embeddings/medical_practice_vectors"
     
     # Embedding model
-    EMBEDDING_MODEL = "BAAI/bge-base-en-v1.5"  # Multilingual, high quality
+    EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2" # Multilingual, high quality
     # Alternatives:
     # - "BAAI/bge-base-en-v1.5" (English only, faster)
     # - "bert-base-uncased" (lightweight)
@@ -236,49 +236,7 @@ def main():
     # OPTIONAL: TEST SEARCH
     # ============================================================
     
-    """test_search = input("\n\nWould you like to test a search query? (yes/no): ").strip().lower()
-    
-    if test_search == 'yes':
-        while True:
-            query = input("\nEnter your search query (or 'quit' to exit): ").strip()
-            
-            if query.lower() in ['quit', 'exit', 'q']:
-                break
-            
-            if not query:
-                continue
-            
-            print(f"\n Searching for: '{query}'")
-            print("-" * 70)
-            
-            try:
-                results = indexer.search(query, top_k=5)
-                
-                if not results:
-                    print("No results found.")
-                    continue
-                
-                print(f"\n Top {len(results)} Results:\n")
-                
-                for i, result in enumerate(results, 1):
-                    print(f"{i}. [{result['metadata']['collection']}]")
-                    print(f"   Score: {result['similarity_score']:.4f}")
-                    
-                    # Show relevant fields based on collection
-                    metadata = result['metadata']
-                    if 'name' in metadata:
-                        print(f"   Name: {metadata['name']}")
-                    if 'question' in metadata and metadata['collection'] == 'faqs':
-                        print(f"   Question: {metadata['question'][:100]}...")
-                    
-                    # Show text preview
-                    text_preview = result['text'][:200].replace('\n', ' ')
-                    print(f"   Preview: {text_preview}...")
-                    print()
-                
-            except Exception as e:
-                print(f" Search error: {e}")
-                logger.exception("Search failed")"""
+
     
     print("\nIngestion pipeline finished!")
     return message
