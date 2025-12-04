@@ -2,7 +2,6 @@
 Multi-Collection MongoDB RAG Ingestion Pipeline
 Processes multiple collections from medical practice database
 """
-
 import os
 import sys
 from pathlib import Path

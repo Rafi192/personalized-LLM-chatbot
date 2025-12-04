@@ -7,7 +7,6 @@ import re
 
 logger = logging.getLogger(__name__)
 
-
 class MultiCollectionMongoDBLoader:
     """
     Enhanced MongoDB loader for handling multiple collections with different schemas.

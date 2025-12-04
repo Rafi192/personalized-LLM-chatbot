@@ -12,3 +12,4 @@ src/retriever/__pycache__/
 # .env*
 rag_chatbot_env/
 venv/
+__pycache__/
