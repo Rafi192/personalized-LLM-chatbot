@@ -32,13 +32,13 @@ Develop a personalized LLM chatbot using cutting-edge technology. This project p
 2. **Create virtual environment**
 ```bash
    # Windows
-   python -m venv rag_chatbot_env
+   python -3.12 -m venv rag_chatbot_env
    rag_chatbot_env\Scripts\activate
 
    # Linux/Mac
-   python3 -m venv rag_chatbot_env
+   python3.12 -m venv rag_chatbot_env
    source rag_chatbot_env/bin/activate
-```
+   ```
 3. **Install dependencies**
 ```bash
    pip install -r requirements.txt
